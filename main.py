@@ -1,13 +1,13 @@
 import random
 
-class card:
+class Card:
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
     def __str__(self):
         return f"{self.rank['rank']} of {self.suit}"
 
-class deck:
+class Deck:
     def __init__(self):
         self.cards = []
         suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
@@ -29,7 +29,7 @@ class deck:
 
         for suit in suits:
             for rank in ranks:
-                self.cards.append(card(suit, rank))
+                self.cards.append(Card(suit, rank))
 
     def shuffle(self):
         if len(self.cards) > 1:
@@ -44,7 +44,7 @@ class deck:
         return cards_dealt
 
 
-class hand:
+class Hand:
     def __init__(self, dealer=False):
         self.cards = []
         self.valve = 0
@@ -87,7 +87,7 @@ class hand:
             print("Value:", self.get_value())
             print()
 
-class game:
+class Game:
     def play(self):
         game_number = 0
         games_to_play = 0
@@ -101,11 +101,11 @@ class game:
         while game_number < games_to_play:
             game_number += 1
 
-            deck1 = deck()
+            deck1 = Deck()
             deck1.shuffle()
             
-            player_hand = hand()
-            dealer_hand = hand(dealer=True)
+            player_hand = Hand()
+            dealer_hand = Hand(dealer=True)
 
             for i in range(2):
                 player_hand.add_card(deck1.deal(1))
@@ -182,5 +182,5 @@ class game:
             return True
         return False
 
-g = game()
+g = Game()
 g.play()
