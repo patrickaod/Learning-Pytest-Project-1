@@ -1,13 +1,27 @@
-# Learning-Pytest-Project-1
-This project helps explore and learn pytest by testing basic Python logic and simple API routes built with vanilla Python. It covers writing test cases, using fixtures, parameterised tests, and mocking. The goal is to build strong testing skills and integrate CI/CD for automated testing with GitHub Actions.
+# Zero to Hero - FreeCodeCamp Tutorial to Full Deployment
+This project begins with the FreeCodeCamp Python Tutorial for Beginners and evolves it from a single‑file “god function” into a fully modular, object‑oriented, production‑ready application.
+
+My goal is to use this simple starting point as a springboard to explore real‑world full‑stack concepts — including Docker, AWS / Azure deployment, Pytest, and a React front end.
+
+This repository documents my journey from fundamentals to full deployment, capturing what I learn as I refactor, test, containerise, and eventually deploy the application to the cloud.
+
 ## Description
+This project takes the original FreeCodeCamp Python tutorial and transforms it into a fully modular, object‑oriented application while placing a strong emphasis on unit testing at every stage of development.
 
-This project is designed to help me learn and master the pytest framework by writing tests for basic Python logic and API routes built using vanilla Python. The goal is to explore various features of pytest, including test case creation, fixtures, parameterized tests, and mocking, while applying them to simple applications. This project will serve as a practical reference for testing in Python, as well as an opportunity to integrate continuous testing using GitHub Actions.
+As the application evolves, I will introduce pytest to validate each component — from basic functions to API routes, containerised services, and eventually cloud‑deployed infrastructure. Testing is not an afterthought here; it is the core practice guiding architecture, refactoring, and deployment decisions.
 
-The project covers:
-- Writing tests for basic Python functions (e.g., arithmetic operations, string manipulation).
-- Testing simple API routes using Python’s built-in HTTP server.
-- Exploring advanced pytest features like fixtures, parameterized tests, and mocking.
-- Integrating test coverage and CI/CD for automated testing.
+The goal is to build a complete end‑to‑end project while developing strong habits around maintainability, testability, and continuous integration.
 
-This project is part of my journey to become more proficient in testing and to build a strong foundation for writing maintainable Python code.
+### Objectives
+
+  - Refactor the original tutorial code into a modular, object‑oriented structure
+
+  - Introduce automated testing with Pytest
+
+  - Containerize the application using Docker
+
+  - Deploy to AWS or Azure
+
+  - Build a simple React front end
+
+  - Document the entire learning process
