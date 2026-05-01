@@ -1,5 +1,5 @@
 # Zero to Hero - FreeCodeCamp Tutorial to Full Deployment
-This project begins with the FreeCodeCamp Python Tutorial for Beginners and evolves it from a single‑file “god function” into a fully modular, object‑oriented, production‑ready application.
+This project begins with the [FreeCodeCamp Python Tutorial for Beginners](https://www.youtube.com/watch?v=eWRfhZUzrAc) and evolves it from a single‑file “god function” into a fully modular, object‑oriented, production‑ready application.
 
 My goal is to use this simple starting point as a springboard to explore real‑world full‑stack concepts — including Docker, AWS / Azure deployment, Pytest, and a React front end.
 
