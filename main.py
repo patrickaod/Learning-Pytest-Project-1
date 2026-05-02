@@ -30,8 +30,9 @@ class game:
             print("*" * 30)
             print(f"Game {game_number} of {games_to_play}")
             print("*" * 30)
-            player_hand.display()
-            dealer_hand.display()
+            print(player_hand.display())  
+            print(dealer_hand.display())  
+            
 
             if check_winner(player_hand, dealer_hand):
                 continue
@@ -45,7 +46,7 @@ class game:
                     print()
                 if choice in ["h", "hit"]:
                     player_hand.add_card(deck1.deal(1))
-                    player_hand.display()
+                    print(player_hand.display())  
 
             if check_winner(player_hand, dealer_hand):
                 continue
