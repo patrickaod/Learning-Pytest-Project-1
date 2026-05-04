@@ -23,3 +23,10 @@ def check_winner(player_hand, dealer_hand, game_over=False):
             else:
                 return "Dealer Win!"
         return False
+
+def handle_result(player_hand, dealer_hand, game_over=False):
+    result = check_winner(player_hand, dealer_hand, game_over)
+    if result:
+        print(result)
+        return True
+    return False
