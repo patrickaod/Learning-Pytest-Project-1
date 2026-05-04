@@ -1,7 +1,7 @@
 class Hand:
     def __init__(self, dealer=False):
         self.cards = []
-        self.valve = 0
+        self.value = 0
         self.dealer = dealer
 
     def add_card(self, card_list):
