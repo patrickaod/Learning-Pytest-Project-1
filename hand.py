@@ -1,7 +1,7 @@
 class Hand:
     def __init__(self, dealer=False):
         self.cards = []
-        self.valve = 0
+        self.value = 0
         self.dealer = dealer
 
     def add_card(self, card_list):
@@ -28,15 +28,15 @@ class Hand:
         return self.get_value()==21
 
     def display(self, show_all_dealer_cards=False):
-        print(f'''{"Dealer's" if self.dealer else "Your"} Hand: ''')
+        output = f'''{"Dealer's" if self.dealer else "Your"} Hand: \n'''
 
         for index, card in enumerate(self.cards):
-            if index == 0 and self.dealer \
-                and not show_all_dealer_cards and not self.is_blackjack():
-                print("Hidden")
+            if index == 0 and self.dealer and not show_all_dealer_cards and not self.is_blackjack():
+                output += "Hidden\n"
             else:
-                print(card)
+                output += f"{card}\n"
 
         if not self.dealer:
-            print("Value:", self.get_value())
-            print()
+            output += f"Value: {self.get_value()}\n"
+
+        return output

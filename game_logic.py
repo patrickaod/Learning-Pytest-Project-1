@@ -1,26 +1,32 @@
 def check_winner(player_hand, dealer_hand, game_over=False):
         if not game_over:      
             if player_hand.get_value() > 21:
-                print("You bust dealer wins!")
-                return True
+                return "You bust dealer wins!"
+
             elif dealer_hand.get_value() > 21:
-                print("Dealer bust player wins!")
-                return True
+                return "Dealer bust player wins!"
+
             elif player_hand.is_blackjack() and dealer_hand.is_blackjack():
-                print("It's a Tie!")
-                return True
+                return "It's a Tie!"
+
             elif player_hand.is_blackjack() and not dealer_hand.is_blackjack():
-                print("You have a blackjack, you WIN!")
-                return True
+                return "You have a blackjack, you WIN!"
+
             elif dealer_hand.is_blackjack() and not player_hand.is_blackjack():
-                print("Dealer has a blackjack, you Lose!")
-                return True
+                return "Dealer has a blackjack, you Lose!"
+
         else:
             if player_hand.get_value() > dealer_hand.get_value():
-                print("You Win!")
+                return "You Win!"
             elif player_hand.get_value() == dealer_hand.get_value():
-                print("TIE!")
+                return "TIE!"
             else:
-                print("Dealer Win!")
-            return True
+                return "Dealer Win!"
         return False
+
+def handle_result(player_hand, dealer_hand, game_over=False):
+    result = check_winner(player_hand, dealer_hand, game_over)
+    if result:
+        print(result)
+        return True
+    return False
