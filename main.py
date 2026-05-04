@@ -1,4 +1,4 @@
-from game_logic import check_winner, handle_result
+from game_logic import handle_result
 from hand import Hand
 from deck import Deck
 
