@@ -1,4 +1,4 @@
-from game_logic import check_winner
+from game_logic import check_winner, handle_result
 from hand import Hand
 from deck import Deck
 
@@ -33,8 +33,7 @@ class game:
             print(player_hand.display())  
             print(dealer_hand.display())  
             
-
-            if check_winner(player_hand, dealer_hand):
+            if handle_result(player_hand, dealer_hand):
                 continue
 
             choice = ""
@@ -48,7 +47,7 @@ class game:
                     player_hand.add_card(deck1.deal(1))
                     print(player_hand.display())  
 
-            if check_winner(player_hand, dealer_hand):
+            if handle_result(player_hand, dealer_hand):
                 continue
 
             player_hand_value = player_hand.get_value()
@@ -58,16 +57,17 @@ class game:
                 dealer_hand.add_card(deck1.deal(1))
                 dealer_hand_value = dealer_hand.get_value()
 
-            dealer_hand.display(show_all_dealer_cards=True)
+            print(dealer_hand.display(show_all_dealer_cards=True))
 
-            if check_winner(player_hand, dealer_hand):
+            if handle_result(player_hand, dealer_hand):
                 continue
 
             print("Final Results")
             print("Your Hand:", player_hand_value)
             print("Dealer Hand:", dealer_hand_value)
 
-            check_winner(player_hand, dealer_hand, True)
+            if handle_result(player_hand, dealer_hand, True):
+                continue
         
         print("\n Thanks for Playing!")
         
