@@ -4,72 +4,64 @@ from deck import Deck
 
 class Game:
     def play(self):
-        game_number = 0
-        games_to_play = 0
 
-        while games_to_play <= 0:
-            try:
-                games_to_play = int(input("How many games do you want to play? "))
-            except:
-                print("You have to enter a number")
+        games_to_play = int(input("How many games? "))
+        game_number = 0
 
         while game_number < games_to_play:
             game_number += 1
 
-            deck1 = Deck()
-            deck1.shuffle()
+            deck = Deck()
+            deck.shuffle()
 
-            player_hand = Hand()
-            dealer_hand = Hand(dealer=True)
+            player = Hand()
+            dealer = Hand(dealer=True)
 
-            for i in range(2):
-                player_hand.add_card(deck1.deal(1))
-                dealer_hand.add_card(deck1.deal(1))
+            for _ in range(2):
+                player.add_card(deck.deal(1))
+                dealer.add_card(deck.deal(1))
 
             print()
             print("*" * 30)
             print(f"Game {game_number} of {games_to_play}")
             print("*" * 30)
-            print(player_hand.display())  
-            print(dealer_hand.display())  
-            
-            result = check_winner(player_hand, dealer_hand)
+            print(player.display())
+            print(dealer.display())
 
+            # --- early check ---
+            result = check_winner(player, dealer)
             if result:
                 print(result)
                 continue
 
-            choice = ""
-            while player_hand.get_value() < 21 and choice not in ["s", "stand"]:
-                choice = input("Please choice Hit or Stand? ").lower()
-                print()
-                while choice not in ["h", "hit", "s", "stand"]:
-                    choice = input("Please choice Hit(h) or Stand(s)? ").lower()
-                    print()
+            # --- player turn ---
+            while player.get_value() < 21:
+                choice = input("Hit or Stand? ").lower()
+
                 if choice in ["h", "hit"]:
-                    player_hand.add_card(deck1.deal(1))
-                    print(player_hand.display())  
+                    player.add_card(deck.deal(1))
+                    print(player.display())
+                else:
+                    break
 
-            result = check_winner(player_hand, dealer_hand)
-
+            result = check_winner(player, dealer)
             if result:
                 print(result)
                 continue
 
-            player_hand_value = player_hand.get_value()
-            dealer_hand_value = dealer_hand.get_value()
+            # --- dealer turn ---
+            while dealer.get_value() < 17:
+                dealer.add_card(deck.deal(1))
 
-            while dealer_hand_value < 17:
-                dealer_hand.add_card(deck1.deal(1))
-                dealer_hand_value = dealer_hand.get_value()
+            print(dealer.display(True))
 
-            print(dealer_hand.display(show_all_dealer_cards=True))
-
+            # --- final result ---
+            player_hand_value = player.get_value()
+            dealer_hand_value = dealer.get_value()
             print("Final Results")
             print("Your Hand:", player_hand_value)
             print("Dealer Hand:", dealer_hand_value)
-
-            result = check_winner(player_hand, dealer_hand, True)
+            result = check_winner(player, dealer, True)
             print(result)
 
         print("\n Thanks for Playing!")
