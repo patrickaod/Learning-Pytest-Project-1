@@ -36,8 +36,8 @@ Because business logic and presentation are combined, the codebase becomes diffi
 
 The original design also lacks clear separation of responsibilities between classes:
 
-The 'Game' class handles control flow, user interaction, and rule evaluation
-The 'Hand' class manages card state, scoring, and display formatting
+- The 'Game' class handles control flow, user interaction, and rule evaluation
+- The 'Hand' class manages card state, scoring, and display formatting
 
 This violates the Single Responsibility Principle, making the system harder to maintain, test, and modify safely.
 
@@ -46,3 +46,27 @@ Additionally, heavy reliance on print-based output introduces side effects into 
 Finally, the monolithic structure of the game loop concentrates all logic into a single execution flow. This makes the system harder to extend, debug, and refactor compared to a modular or layered architecture where responsibilities are clearly separated.
 
 While this approach is appropriate for learning core programming concepts, it does not reflect production-grade software design practices.
+
+### Refactored Architecture (Before → After)
+The project has been progressively refactored from a tightly coupled tutorial implementation into a modular, testable, object-oriented system. The goal of this transformation was to align the codebase more closely with real-world software engineering practices.
+
+**Key Refactor Changes From Phases 1-3**
+
+* Separated game logic from input/output (removed logic tied to `print()` and `input()`)
+* Refactored functions to return values instead of producing direct side effects
+* Clarified class responsibilities:
+
+  * `Hand` handles card state and scoring only
+  * `Deck` handles card creation and dealing
+  * `Game` handles game flow orchestration only
+* Removed mixed responsibilities within single methods (improved Single Responsibility Principle adherence)
+* Reduced side effects in core methods to improve testability
+* Introduced modular game phases (deal → player turn → dealer turn → result evaluation)
+* Replaced monolithic game loop structure with clearer staged flow
+* Introduced automated testing using Pytest for core components
+* Enabled unit testing by isolating business logic from terminal I/O
+* Improved overall code readability, maintainability, and extensibility
+
+The project has now been significantly refactored from its original tutorial-based structure into a more modular and testable application. Core game logic has been separated from input and output, responsibilities have been clarified across the main classes, and the overall game flow has been broken into clearer stages. This has addressed many of the original issues around tight coupling, side effects in core methods, and a lack of separation of concerns.
+
+As a result, the codebase is now much closer to a production-style structure, with improved maintainability, readability, and automated test coverage. The remaining gaps mainly relate to further isolating the game loop from terminal interaction and continuing to refine the architecture for potential expansion into other interfaces such as a web or API-based front end.
