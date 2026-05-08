@@ -1,7 +1,6 @@
 # conftest.py
 import pytest
 from hand import Hand
-from card import Card
 
 @pytest.fixture
 def hand_factory():

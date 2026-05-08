@@ -1,4 +1,3 @@
-from hand import Hand
 from card import Card
 from game_logic import check_winner, handle_result
 
@@ -135,8 +134,9 @@ def test_handle_result_outputs_message(hand_factory,capsys):
         Card("Spades", {"rank": "9", "value": 9})
     ])
 
-    print_test = handle_result(player, dealer, True)
+    result = handle_result(player, dealer, True)
 
     captured = capsys.readouterr()
 
+    assert result is True
     assert "Dealer Win!" in captured.out
