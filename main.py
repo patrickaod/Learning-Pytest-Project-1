@@ -22,7 +22,7 @@ class Game:
             deck.shuffle()
 
             player_hand = Hand()
-            dealer_hand = Hand(dealer_hand=True)
+            dealer_hand = Hand(dealer=True)
 
             for _ in range(2):
                 player_hand.add_card(deck.deal(1))
