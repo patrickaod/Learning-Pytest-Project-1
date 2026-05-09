@@ -28,24 +28,19 @@ The goal is to build a complete end‑to‑end project while developing strong h
 
 ## Project Overview (Original Codebase)
 
-The original FreeCodeCamp Blackjack project is a simple terminal-based game designed to teach Python fundamentals through a working example. While effective for beginners, the initial implementation introduces several architectural limitations from a software engineering perspective.
+The original FreeCodeCamp Blackjack project is a simple terminal-based game intended to teach Python fundamentals through a practical example. While effective for beginners, the implementation introduces several architectural limitations from a software engineering perspective.
 
-The game is tightly coupled to the terminal, with core logic directly dependent on 'input()' and 'print()' statements. This makes the system easy to follow in a learning context, but prevents reuse of the logic outside a CLI environment and limits extensibility for web or mobile applications.
+The application is tightly coupled to the terminal, with core logic directly dependent on `input()` and `print()` calls. Although this simplifies the learning experience, it prevents the game logic from being reused independently of the CLI and limits extensibility for alternative interfaces such as web or mobile applications.
 
-Because business logic and presentation are combined, the codebase becomes difficult to scale. Any attempt to extend functionality risks introducing tightly coupled dependencies, often leading to “spaghetti code” structures where changes in one area unintentionally affect others. This also makes automated testing more difficult, as core behaviour is not isolated from runtime I/O.
+A key issue is the lack of separation between business logic and presentation. Game rules, control flow, and user interaction are handled within the same execution path, creating strong coupling between components. As the project grows, this increases maintenance complexity and raises the risk of unintended side effects when modifying behaviour.
 
-The original design also lacks clear separation of responsibilities between classes:
+The design also blurs class responsibilities. The `Game` class manages orchestration, rule evaluation, and user interaction, while the Hand class combines state management with display formatting. This violates the Single Responsibility Principle and reduces the modularity of the system.
 
-- The `Game` class handles control flow, user interaction, and rule evaluation
-- The `Hand` class manages card state, scoring, and display formatting
+Because runtime I/O is embedded directly into core methods, automated testing becomes more difficult. Logic cannot be tested cleanly in isolation, often requiring output-capturing workarounds or manual verification instead of straightforward unit tests.
 
-This violates the Single Responsibility Principle, making the system harder to maintain, test, and modify safely.
+Finally, the game loop follows a monolithic structure in which most behaviour is concentrated in a single procedural flow. While suitable for demonstrating foundational programming concepts, this approach becomes harder to extend, debug, and refactor compared to a layered or modular architecture with clearly separated responsibilities.
 
-Additionally, heavy reliance on print-based output introduces side effects into core methods. While this is common in beginner projects, it reduces testability and forces reliance on workarounds such as 'capsys' or manual testing rather than pure unit tests.
-
-Finally, the monolithic structure of the game loop concentrates all logic into a single execution flow. This makes the system harder to extend, debug, and refactor compared to a modular or layered architecture where responsibilities are clearly separated.
-
-While this approach is appropriate for learning core programming concepts, it does not reflect production-grade software design practices.
+Overall, the project succeeds as an educational introduction to Python, but it does not reflect the design principles typically associated with production-grade software systems.
 
 ### Refactored Architecture (Before → After)
 The project has been progressively refactored from a tightly coupled tutorial implementation into a modular, testable, object-oriented system. The goal of this transformation was to align the codebase more closely with real-world software engineering practices.
