@@ -34,7 +34,7 @@ The application is tightly coupled to the terminal, with core logic directly dep
 
 A key issue is the lack of separation between business logic and presentation. Game rules, control flow, and user interaction are handled within the same execution path, creating strong coupling between components. As the project grows, this increases maintenance complexity and raises the risk of unintended side effects when modifying behaviour.
 
-The design also blurs class responsibilities. The `Game` class manages orchestration, rule evaluation, and user interaction, while the Hand class combines state management with display formatting. This violates the Single Responsibility Principle and reduces the modularity of the system.
+The design also blurs class responsibilities. The `Game` class manages orchestration, rule evaluation, and user interaction, while the `Hand` class combines state management with display formatting. This violates the Single Responsibility Principle and reduces the modularity of the system.
 
 Because runtime I/O is embedded directly into core methods, automated testing becomes more difficult. Logic cannot be tested cleanly in isolation, often requiring output-capturing workarounds or manual verification instead of straightforward unit tests.
 
