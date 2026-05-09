@@ -36,8 +36,8 @@ Because business logic and presentation are combined, the codebase becomes diffi
 
 The original design also lacks clear separation of responsibilities between classes:
 
-- The 'Game' class handles control flow, user interaction, and rule evaluation
-- The 'Hand' class manages card state, scoring, and display formatting
+- The `Game` class handles control flow, user interaction, and rule evaluation
+- The `Hand` class manages card state, scoring, and display formatting
 
 This violates the Single Responsibility Principle, making the system harder to maintain, test, and modify safely.
 
