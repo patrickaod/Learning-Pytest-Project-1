@@ -1,5 +1,5 @@
 from card import Card
-from game_logic import check_winner, handle_result
+from game_logic import check_winner
 
 def test_player_bust(hand_factory):
     
