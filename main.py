@@ -3,6 +3,36 @@ from hand import Hand
 from deck import Deck
 
 class Game:
+
+    def __init__(self):
+        self.reset_game()
+
+    def reset_game(self):
+        self.deck = Deck()
+        self.deck.shuffle()
+        self.player_hand = Hand()
+        self.dealer_hand = Hand(dealer=True)
+        self.game_over = False
+    
+    def initial_deal(self):
+        for _ in range(2):
+            self.player_hand.add_card(self.deck.deal(1))
+            self.dealer_hand.add_card(self.deck.deal(1))
+
+    def player_hit(self):
+        self.player_hand.add_card(self.deck.deal(1))
+
+    def dealer_turn(self):
+        while self.dealer_hand.get_value() <= 17:
+            self.dealer_hand.add_card(self.deck.deal(1))
+
+    def check_result(self, game_over=False):
+        return check_winner(
+            self.player_hand,
+            self.dealer_hand,
+            game_over
+        )
+
     def play(self):
 
         while True:
@@ -18,37 +48,33 @@ class Game:
         while game_number < games_to_play:
             game_number += 1
 
-            deck = Deck()
-            deck.shuffle()
-
-            player_hand = Hand()
-            dealer_hand = Hand(dealer=True)
-
-            for _ in range(2):
-                player_hand.add_card(deck.deal(1))
-                dealer_hand.add_card(deck.deal(1))
+            # reset state
+            self.__init__()
 
             print()
             print("*" * 30)
             print(f"Game {game_number} of {games_to_play}")
             print("*" * 30)
-            print(player_hand.display())
-            print(dealer_hand.display())
 
-            # --- early check ---
-            result = check_winner(player_hand, dealer_hand)
+            self.initial_deal()
+
+            print(self.player_hand.display())
+            print(self.dealer_hand.display())
+
+            result = self.check_result()
+
             if result:
                 print(result)
                 continue
 
-            # --- player_hand turn ---
-            
-            while player_hand.get_value() < 21:
+            # --- player turn ---
+            while self.player_hand.get_value() < 21:
+
                 choice = input("Hit or Stand? ").lower()
 
                 if choice in ["h", "hit"]:
-                    player_hand.add_card(deck.deal(1))
-                    print(player_hand.display())
+                    self.player_hit()
+                    print(self.player_hand.display())
 
                 elif choice in ["s", "stand"]:
                     break
@@ -56,27 +82,27 @@ class Game:
                 else:
                     print("Please enter Hit or Stand")
 
-            result = check_winner(player_hand, dealer_hand)
+            result = self.check_result()
+
             if result:
                 print(result)
                 continue
 
             # --- dealer turn ---
-            while dealer_hand.get_value() <= 17:
-                dealer_hand.add_card(deck.deal(1))
+            self.dealer_turn()
 
-            print(dealer_hand.display(True))
+            print(self.dealer_hand.display(True))
 
             # --- final result ---
-            player_hand_value = player_hand.get_value()
-            dealer_hand_value = dealer_hand.get_value()
             print("Final Results")
-            print("Your Hand:", player_hand_value)
-            print("Dealer Hand:", dealer_hand_value)
-            result = check_winner(player_hand, dealer_hand, True)
+            print("Your Hand:", self.player_hand.get_value())
+            print("Dealer Hand:", self.dealer_hand.get_value())
+
+            result = self.check_result(True)
+
             print(result)
 
-        print("\n Thanks for Playing!")
+        print("\nThanks for Playing!")
         
 g = Game()
 g.play()
