@@ -71,9 +71,12 @@ class Game:
         print(self.dealer_hand.display(dealer))
 
     def end_game_result_screen(self):
-            print("Final Results")
-            print("Your Hand:", self.player_hand.get_value())
-            print("Dealer Hand:", self.dealer_hand.get_value())
+        print("Final Results")
+        print("Your Hand:", self.player_hand.get_value())
+        print("Dealer Hand:", self.dealer_hand.get_value())
+    
+    def final_message(self):
+        print("\nThanks for Playing!")
 
     #Player State
     def handle_player_turn(self):
@@ -142,7 +145,8 @@ class Game:
             if self.process_result(result):
                 continue
         
-        print("\nThanks for Playing!")
+        self.final_message()
+        
         
 g = Game()
 g.play()
