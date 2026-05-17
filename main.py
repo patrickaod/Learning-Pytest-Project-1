@@ -1,4 +1,4 @@
-from game_logic import check_winner
+from game_logic import Check_Logic
 from hand import Hand
 from deck import Deck
 
@@ -31,12 +31,24 @@ class Game:
 
             except ValueError:
                 print("Please enter a valid number")
-
-    def check_result(self, game_over=False):
-        return check_winner(
+    
+    #Game Evaluation
+    def check_initial_result(self):
+        return Check_Logic.check_intial_dealt_hand_result(
             self.player_hand,
-            self.dealer_hand,
-            game_over
+            self.dealer_hand
+        )
+
+    def check_bust_condition(self):
+        return Check_Logic.check_immediate_result(
+            self.player_hand,
+            self.dealer_hand
+        )
+    
+    def check_final_condition(self):
+        return Check_Logic.check_final_result(
+            self.player_hand,
+            self.dealer_hand
         )
     
     # Game Display
@@ -96,19 +108,20 @@ class Game:
 
             self.show_game_state()
 
-            result = self.check_result()
-
+            result = self.check_initial_result()
             if result:
                 print(result)
+                self.end_game_result_screen()
                 continue
 
             # --- player turn ---
             self.handle_player_turn()
 
-            result = self.check_result()
+            result = self.check_bust_condition()
 
             if result:
                 print(result)
+                self.end_game_result_screen()
                 continue
 
             # --- dealer turn ---
@@ -116,12 +129,14 @@ class Game:
 
             print(self.dealer_hand.display(True))
 
-            result = self.check_result(True)
+            result = self.check_bust_condition()
 
+            if self.check_bust_condition():
+                print(self)
+            else:
+                print(self.check_final_condition())
             # --- final result ---
             self.end_game_result_screen()
-
-            print(result)
 
         print("\nThanks for Playing!")
         
