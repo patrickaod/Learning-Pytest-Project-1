@@ -51,6 +51,14 @@ class Game:
             self.dealer_hand
         )
     
+    def process_result(self, result):
+        if result:
+            self.end_game_result_screen()
+            print()
+            print(result)
+            return True
+        return False
+    
     # Game Display
     def game_start_screen(self, game_number, games_to_play):
             print()
@@ -107,21 +115,15 @@ class Game:
             self.initial_deal()
 
             self.show_game_state()
-
+        
             result = self.check_initial_result()
-            if result:
-                print(result)
-                self.end_game_result_screen()
-                continue
 
             # --- player turn ---
             self.handle_player_turn()
 
             result = self.check_bust_condition()
 
-            if result:
-                print(result)
-                self.end_game_result_screen()
+            if self.process_result(result):
                 continue
 
             # --- dealer turn ---
@@ -131,13 +133,15 @@ class Game:
 
             result = self.check_bust_condition()
 
-            if self.check_bust_condition():
-                print(self)
-            else:
-                print(self.check_final_condition())
+            if self.process_result(result):
+                continue
+            
             # --- final result ---
-            self.end_game_result_screen()
+            result = self.check_final_condition()
 
+            if self.process_result(result):
+                continue
+        
         print("\nThanks for Playing!")
         
 g = Game()
