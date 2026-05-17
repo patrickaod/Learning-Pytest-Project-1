@@ -1,4 +1,4 @@
-from game_logic import Check_Logic
+from game_logic import CheckLogic
 from hand import Hand
 from deck import Deck
 
@@ -34,19 +34,19 @@ class Game:
     
     #Game Evaluation
     def check_initial_result(self):
-        return Check_Logic.check_intial_dealt_hand_result(
+        return CheckLogic.check_intial_dealt_hand_result(
             self.player_hand,
             self.dealer_hand
         )
 
     def check_bust_condition(self):
-        return Check_Logic.check_immediate_result(
+        return CheckLogic.check_immediate_result(
             self.player_hand,
             self.dealer_hand
         )
     
     def check_final_condition(self):
-        return Check_Logic.check_final_result(
+        return CheckLogic.check_final_result(
             self.player_hand,
             self.dealer_hand
         )
