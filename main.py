@@ -31,7 +31,7 @@ class Game:
 
             except ValueError:
                 print("Please enter a valid number")
-    
+
     #Game Evaluation
     def check_initial_result(self):
         return CheckLogic.check_intial_dealt_hand_result(
@@ -44,13 +44,13 @@ class Game:
             self.player_hand,
             self.dealer_hand
         )
-    
+
     def check_final_condition(self):
         return CheckLogic.check_final_result(
             self.player_hand,
             self.dealer_hand
         )
-    
+
     def process_result(self, result):
         if result:
             self.end_game_result_screen()
@@ -58,7 +58,7 @@ class Game:
             print(result)
             return True
         return False
-    
+
     # Game Display
     def game_start_screen(self, game_number, games_to_play):
             print()
@@ -102,6 +102,7 @@ class Game:
         while self.dealer_hand.get_value() <= 17:
             self.dealer_hand.add_card(self.deck.deal(1))
 
+    #Game Engine
     def play(self):
 
         games_to_play = self.game_count()
@@ -118,7 +119,7 @@ class Game:
             self.initial_deal()
 
             self.show_game_state()
-        
+
             result = self.check_initial_result()
 
             # --- player turn ---
@@ -138,15 +139,14 @@ class Game:
 
             if self.process_result(result):
                 continue
-            
+
             # --- final result ---
             result = self.check_final_condition()
 
             if self.process_result(result):
                 continue
-        
+
         self.final_message()
-        
-        
+
 g = Game()
 g.play()
