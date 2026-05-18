@@ -33,13 +33,13 @@ class Game:
 
     #Game Evaluation
     def check_initial_result(self):
-        return CheckLogic.check_initial_dealt_hand_result(
+        return CheckLogic.check_initial_blackjack(
             self.player_hand,
             self.dealer_hand
         )
 
     def check_bust_condition(self):
-        return CheckLogic.check_immediate_result(
+        return CheckLogic.check_bust_result(
             self.player_hand,
             self.dealer_hand
         )
