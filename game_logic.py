@@ -1,5 +1,5 @@
 class CheckLogic:
-    def check_intial_dealt_hand_result(player_hand, dealer_hand):   
+    def check_initial_dealt_hand_result(player_hand, dealer_hand):   
         if player_hand.is_blackjack() and dealer_hand.is_blackjack():
             return "It's a Tie!"
 
