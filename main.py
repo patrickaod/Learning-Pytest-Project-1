@@ -58,9 +58,9 @@ class Game:
             print(f"Game {game_number} of {games_to_play}")
             print("*" * 30)
 
-    def show_game_state(self, dealer=False):
+    def show_game_state(self, show_all_dealer_cards=False):
         print(self.player_hand.display())
-        print(self.dealer_hand.display(dealer))
+        print(self.dealer_hand.display(show_all_dealer_cards))
 
     def end_game_result_screen(self):
         print("Final Results")
