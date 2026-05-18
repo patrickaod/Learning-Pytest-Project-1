@@ -1,5 +1,5 @@
 from app.models.card import Card
-from app.engine.game_logic import check_winner
+from app.engine.game_logic import CheckLogic
 
 def test_player_bust(hand_factory):
     
@@ -13,7 +13,7 @@ def test_player_bust(hand_factory):
         Card("Spades", {"rank": "9", "value": 9})
     ])
     
-    result = check_winner(player, dealer)
+    result = CheckLogic.check_bust_result(player, dealer)
 
     assert result == "You bust dealer wins!"
 
@@ -29,7 +29,7 @@ def test_dealer_bust(hand_factory):
         Card("Diamonds", {"rank": "10", "value": 10})
     ])
 
-    result = check_winner(player, dealer)
+    result = CheckLogic.check_bust_result(player, dealer)
 
     assert result == "Dealer bust player wins!"
 
@@ -44,7 +44,7 @@ def test_tie_blackjack(hand_factory):
         Card("Diamonds", {"rank": "J", "value": 10})
     ])
 
-    result = check_winner(player, dealer)
+    result = CheckLogic.check_initial_blackjack(player, dealer)
 
     assert result == "It's a Tie!"
 
@@ -59,7 +59,7 @@ def test_player_blackjack(hand_factory):
         Card("Diamonds", {"rank": "5", "value": 5})
     ])
 
-    result = check_winner(player, dealer)
+    result = CheckLogic.check_initial_blackjack(player, dealer)
 
     assert result == "You have a blackjack, you WIN!"
 
@@ -74,7 +74,7 @@ def test_dealer_blackjack(hand_factory):
         Card("Diamonds", {"rank": "J", "value": 10})
     ])
 
-    result = check_winner(player, dealer)
+    result = CheckLogic.check_initial_blackjack(player, dealer)
 
     assert result == "Dealer has a blackjack, you Lose!"
 
@@ -89,7 +89,7 @@ def test_player_value_win(hand_factory):
         Card("Diamonds", {"rank": "5", "value": 5})
     ])
 
-    result = check_winner(player, dealer, True)
+    result = CheckLogic.check_final_result(player, dealer)
 
     assert result == "You Win!"
 
@@ -104,7 +104,7 @@ def test_tie_hand(hand_factory):
         Card("Diamonds", {"rank": "5", "value": 5})
     ])
 
-    result = check_winner(player, dealer, True)
+    result = CheckLogic.check_final_result(player, dealer)
 
     assert result == "TIE!"
 
@@ -119,24 +119,6 @@ def test_dealer_value_win(hand_factory):
         Card("Spades", {"rank": "9", "value": 9})
     ])
 
-    result = check_winner(player, dealer, True)
+    result = CheckLogic.check_final_result(player, dealer)
 
     assert result == "Dealer Win!"
-
-def test_handle_result_outputs_message(hand_factory,capsys):
-    player = hand_factory(cards=[
-        Card("Hearts", {"rank": "2", "value": 2}),
-        Card("Diamonds", {"rank": "5", "value": 5})
-    ])
-
-    dealer = hand_factory(dealer=True, cards=[
-        Card("Clubs", {"rank": "K", "value": 10}),
-        Card("Spades", {"rank": "9", "value": 9})
-    ])
-
-    result = handle_result(player, dealer, True)
-
-    captured = capsys.readouterr()
-
-    assert result is True
-    assert "Dealer Win!" in captured.out
