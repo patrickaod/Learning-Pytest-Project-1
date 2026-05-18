@@ -125,6 +125,9 @@ class Game:
 
             result = self.check_initial_result()
 
+            if self.display_result(result):
+                continue
+
             # --- player turn ---
             self.handle_player_turn()
 
