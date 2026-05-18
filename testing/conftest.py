@@ -1,6 +1,6 @@
 # conftest.py
 import pytest
-from hand import Hand
+from app.models.hand import Hand
 
 @pytest.fixture
 def hand_factory():

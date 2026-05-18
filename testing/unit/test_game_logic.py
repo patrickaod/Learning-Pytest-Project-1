@@ -1,5 +1,5 @@
-from card import Card
-from game_logic import check_winner
+from app.models.card import Card
+from app.engine.game_logic import check_winner
 
 def test_player_bust(hand_factory):
     

@@ -1,4 +1,4 @@
-from deck import Deck
+from app.models.deck import Deck
 
 def test_deck_initial_size():
     deck = Deck()
