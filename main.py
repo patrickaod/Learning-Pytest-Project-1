@@ -115,7 +115,7 @@ class Game:
             game_number += 1
 
             # reset state
-            self.__init__()
+            self.reset_game()
 
             self.game_start_screen(game_number, games_to_play)
 
