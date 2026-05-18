@@ -50,6 +50,12 @@ class Game:
             self.player_hand,
             self.dealer_hand
         )
+    
+    def evaluate_result(self, result):
+        if result:
+            self.display_result(result)
+            return True
+        return False
 
     # Game Display
     def game_start_screen(self, game_number, games_to_play):
@@ -71,12 +77,9 @@ class Game:
         print("\nThanks for Playing!")
 
     def display_result(self, result):
-        if result:
             self.end_game_result_screen()
             print()
             print(result)
-            return True
-        return False
 
     #Player State
     def handle_player_turn(self):
@@ -125,7 +128,7 @@ class Game:
 
             result = self.check_initial_result()
 
-            if self.display_result(result):
+            if self.evaluate_result(result):
                 continue
 
             # --- player turn ---
@@ -133,7 +136,7 @@ class Game:
 
             result = self.check_bust_condition()
 
-            if self.display_result(result):
+            if self.evaluate_result(result):
                 continue
 
             # --- dealer turn ---
@@ -143,13 +146,13 @@ class Game:
 
             result = self.check_bust_condition()
 
-            if self.display_result(result):
+            if self.evaluate_result(result):
                 continue
 
             # --- final result ---
             result = self.check_final_condition()
 
-            if self.display_result(result):
+            if self.evaluate_result(result):
                 continue
 
         self.final_message()
