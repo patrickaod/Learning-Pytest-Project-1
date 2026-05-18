@@ -1,6 +1,5 @@
 from app.engine.game_logic import CheckLogic
-from app.models.hand import Hand
-from app.models.deck import Deck
+from app.models import Hand, Deck
 
 class Game:
     # Game State
