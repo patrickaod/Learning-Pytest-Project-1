@@ -39,7 +39,6 @@ class Game:
     
     def evaluate_result(self, result):
         if result:
-            self.display_result(result)
             return True
         return False
 
