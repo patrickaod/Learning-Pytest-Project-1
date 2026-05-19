@@ -51,6 +51,3 @@ class Game:
     def dealer_turn(self):
         while self.dealer_hand.get_value() <= 17:
             self.dealer_hand.add_card(self.deck.deal(1))
-    
-    def dealer_show_cards(self):
-        print(self.dealer_hand.display(True))
