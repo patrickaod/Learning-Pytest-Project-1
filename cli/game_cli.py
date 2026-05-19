@@ -8,8 +8,8 @@ def game_start_screen(game_number, games_to_play):
         print("*" * 30)
 
 def show_game_state(game, show_all_dealer_cards=False):
-    print(game.player_hand.display())
-    print(game.dealer_hand.display(show_all_dealer_cards))
+    print(display(game.player_hand))
+    print(display(game.dealer_hand, show_all_dealer_cards))
 
 def end_game_result_screen(game):
     print("Final Results")
@@ -31,14 +31,13 @@ def handle_player_turn(game):
 
         if choice in ["h", "hit"]:
             game.player_hit()
-            print(game.player_hand.display())
+            print(display(game.player_hand))
 
         elif choice in ["s", "stand"]:
             break
 
         else:
             print("Please enter Hit or Stand")
-
 
 def game_count():
     while True:
@@ -53,7 +52,23 @@ def game_count():
         except ValueError:
             print("Please enter a valid number")
 
+def dealer_show_cards(game):
+    print(display(game.dealer_hand, True))
 
+def display(game, show_all_dealer_cards=False):
+    output = f'''{"Dealer's" if game.dealer else "Your"} Hand: \n'''
+
+    for index, card in enumerate(game.cards):
+        if index == 0 and game.dealer and not show_all_dealer_cards and not game.is_blackjack():
+            output += "Hidden\n"
+        else:
+            output += f"{card}\n"
+
+    if not game.dealer:
+        output += f"Value: {game.get_value()}\n"
+
+    return output
+# --- Main Game Function ---
 def play():
     game = Game()
 
@@ -89,7 +104,7 @@ def play():
         # --- Dealer Turn ---
         game.dealer_turn()
 
-        game.dealer_show_cards()
+        dealer_show_cards(game)
 
         result = game.check_bust_condition()
 
