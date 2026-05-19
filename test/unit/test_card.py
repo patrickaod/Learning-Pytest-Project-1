@@ -1,4 +1,4 @@
-from card import Card 
+from app.models.card import Card 
 
 def test_card_str():
     card = Card("Hearts", {"rank": "A", "value": 11})

@@ -26,17 +26,3 @@ class Hand:
 
     def is_blackjack(self):
         return self.get_value()==21
-
-    def display(self, show_all_dealer_cards=False):
-        output = f'''{"Dealer's" if self.dealer else "Your"} Hand: \n'''
-
-        for index, card in enumerate(self.cards):
-            if index == 0 and self.dealer and not show_all_dealer_cards and not self.is_blackjack():
-                output += "Hidden\n"
-            else:
-                output += f"{card}\n"
-
-        if not self.dealer:
-            output += f"Value: {self.get_value()}\n"
-
-        return output

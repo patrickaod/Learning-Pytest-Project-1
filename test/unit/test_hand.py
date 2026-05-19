@@ -1,5 +1,5 @@
-from hand import Hand
-from card import Card
+from app.models.hand import Hand
+from app.models.card import Card
 
 def test_hand_add_card():
     hand = Hand()
