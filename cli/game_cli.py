@@ -27,7 +27,7 @@ def display_result(game, result):
 def handle_player_turn(game):
     while game.player_hand.get_value() < 21:
 
-        choice = input("Hit or Stand? ").lower()
+        choice = input("Hit (h) or Stand (s)? ").lower()
 
         if choice in ["h", "hit"]:
             game.player_hit()
