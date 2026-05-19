@@ -59,10 +59,9 @@ def play():
 
     games_to_play = game_count()
 
-    for i in range(games_to_play):
+    for game_number in range(1, games_to_play + 1):
 
         # --- Initialise Game ---
-        game_number = i + 1
 
         game.reset_game()
 
