@@ -83,6 +83,7 @@ def play():
         result = game.check_bust_condition()
 
         if game.evaluate_result(result):
+            display_result(game, result)
             continue
 
         # --- Dealer Turn ---
