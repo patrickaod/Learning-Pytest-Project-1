@@ -57,7 +57,7 @@ def game_count():
 def play():
     game = Game()
 
-    games_to_play = game.game_count()
+    games_to_play = game_count()
 
     for i in range(games_to_play):
 
@@ -66,19 +66,20 @@ def play():
 
         game.reset_game()
 
-        game.game_start_screen(game_number, games_to_play)
+        game_start_screen(game_number, games_to_play)
 
         game.initial_deal()
 
-        game.show_game_state()
+        show_game_state(game)
 
         result = game.check_initial_result()
 
         if game.evaluate_result(result):
+            display_result(game, result)
             continue
 
         # --- Player Turn ---
-        game.handle_player_turn()
+        handle_player_turn(game)
 
         result = game.check_bust_condition()
 
@@ -93,15 +94,17 @@ def play():
         result = game.check_bust_condition()
 
         if game.evaluate_result(result):
+            display_result(game, result)
             continue
 
         # --- Final Result ---
         result = game.check_final_condition()
 
         if game.evaluate_result(result):
+            display_result(game, result)
             continue
 
-    game.final_message()
+    final_message()
 
 if __name__ == "__main__":
     play()
